@@ -38,7 +38,7 @@ module tb_half_second_pulse;
         end
     end
 
-    // Theo dıi v‡ in chu k? khi cÛ xung tick
+    // Theo d√µi v√† in chu k? khi c√≥ xung tick
     always @(posedge clk) begin
         if (half_second_pulse_o) begin
             $display("[TICK] Xuat hien tai chu ky clock thu: %0d (Time: %0t ps)", clk_cnt, $time);
