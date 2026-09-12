@@ -33,7 +33,7 @@ module top_morse_code (
     );
 
     half_second_pulse #(
-        .P_COUNT_MAX(49) // MÙ ph?ng ??m 50 chu k?
+        .P_COUNT_MAX(49) // M√¥ ph?ng ??m 50 chu k?
     ) u_pulse_gen (
         .clk                 (clk),
         .rst_n               (rst_n),
@@ -49,7 +49,7 @@ module top_morse_code (
         .half_sec_pull_counter_o (w_half_sec_pulse_counter)
     );
 
-    // 4. Module ?i?u khi?n trung t‚m (FSM Controller)
+    // 4. Module ?i?u khi?n trung t√¢m (FSM Controller)
     fsm_controller u_fsm (
         .clk                           (clk),
         .rst_n                         (rst_n),
