@@ -9,7 +9,7 @@
 module tb_top_morse_code2;
 
     // =========================================================================
-    // KHAI B¡O TÕN HI?U
+    // KHAI B√ÅO T√çN HI?U
     // =========================================================================
     reg        clk;
     reg        rst_n;
@@ -48,7 +48,7 @@ module tb_top_morse_code2;
     always #(CLK_PERIOD/2) clk = ~clk;
 
     // =========================================================================
-    // KH?I MONITOR: B?T M√ MORSE V¿ L?U V¿O BUFFER
+    // KH?I MONITOR: B?T M√É MORSE V√Ä L?U V√ÄO BUFFER
     // =========================================================================
     always @(posedge morse_o) begin
         start_time = $time;
@@ -81,7 +81,7 @@ module tb_top_morse_code2;
     end
 
     // =========================================================================
-    // TASK: G?I M√ V¿ KI?M TRA ??I CHI?U
+    // TASK: G?I M√É V√Ä KI?M TRA ??I CHI?U
     // =========================================================================
     task send_char;
         input [5:0]  code;
@@ -120,7 +120,7 @@ module tb_top_morse_code2;
     endtask
 
     // =========================================================================
-    // H¿M H? TR?: D?CH K› T? SANG M√ L?NH V¿ L?Y CHU?I ??I CHI?U
+    // H√ÄM H? TR?: D?CH K√ù T? SANG M√É L?NH V√Ä L?Y CHU?I ??I CHI?U
     // =========================================================================
     function [5:0] ascii_to_code;
         input [7:0] char;
@@ -169,10 +169,10 @@ module tb_top_morse_code2;
     endfunction
 
     // =========================================================================
-    // K?CH B?N CHÕNH: QU…T V¿ TRUY?N V?N B?N
+    // K?CH B?N CH√çNH: QU√âT V√Ä TRUY?N V?N B?N
     // =========================================================================
     
-    // ?I?N ?O?N V?N B?N C?N TEST V¿O ?¬Y (NÍn ch?a 2 d?u c·ch ? cu?i chu?i)
+    // ?I?N ?O?N V?N B?N C?N TEST V√ÄO ?√ÇY (N√™n ch?a 2 d?u c√°ch ? cu?i chu?i)
     reg [8*25:1] paragraph = "I AM NAM HCMUT HIEU SOC  "; 
     
     integer i;
@@ -207,9 +207,9 @@ module tb_top_morse_code2;
 
                 if (next_char == " ") begin
                     l_space = 0; 
-                    w_space = 1; // K?t th˙c t?
+                    w_space = 1; // K?t th√∫c t?
                 end else begin
-                    l_space = 1; // CÚn ch? ti?p theo
+                    l_space = 1; // C√≤n ch? ti?p theo
                     w_space = 0;
                 end
 
