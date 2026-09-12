@@ -15,7 +15,7 @@ module morse_code_decoder (
 
     always @(*) begin
         case (letter_code_i)
-            // Ch? c·i (A-Z)
+            // Ch? c√°i (A-Z)
             6'd0 : begin code_o = 5'b01000; code_length_o = 3'd2; end // A
             6'd1 : begin code_o = 5'b10000; code_length_o = 3'd4; end // B
             6'd2 : begin code_o = 5'b10100; code_length_o = 3'd4; end // C
