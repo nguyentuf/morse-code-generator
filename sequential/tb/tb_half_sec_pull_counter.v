@@ -19,13 +19,13 @@ module tb_half_sec_pull_counter;
         .half_sec_pull_counter_o(half_sec_pull_counter_o)
     );
 
-    // T?o xung nh?p clock liÍn t?c
+    // T?o xung nh?p clock li√™n t?c
     always #(CLK_PERIOD / 2) clk = ~clk;
 
     initial begin
-        // Kh?i t?o tr?ng th·i ban ??u
+        // Kh?i t?o tr?ng th√°i ban ??u
         clk        = 1'b0;
-        rst_n      = 1'b0; // KÈo reset b?t ??ng b? m?c th?p
+        rst_n      = 1'b0; // K√©o reset b?t ??ng b? m?c th?p
         srst_i     = 1'b0;
         increase_i = 1'b0;
 
@@ -34,7 +34,7 @@ module tb_half_sec_pull_counter;
         rst_n = 1'b1;
         #(CLK_PERIOD * 2);
 
-        // 2. KÌch t?ng 3 l?n (??m 0 -> 1 -> 2 -> 3)
+        // 2. K√≠ch t?ng 3 l?n (??m 0 -> 1 -> 2 -> 3)
         repeat (3) begin
             @(posedge clk);
             increase_i = 1'b1;
@@ -43,10 +43,10 @@ module tb_half_sec_pull_counter;
             #(CLK_PERIOD * 2);
         end
 
-        // 3. Gi? nguyÍn gi· tr? khi increase_i = 0
+        // 3. Gi? nguy√™n gi√° tr? khi increase_i = 0
         #(CLK_PERIOD * 5);
 
-        // 4. KÌch t?ng thÍm 4 l?n (??m 3 -> 4 -> 5 -> 6 -> 7)
+        // 4. K√≠ch t?ng th√™m 4 l?n (??m 3 -> 4 -> 5 -> 6 -> 7)
         repeat (4) begin
             @(posedge clk);
             increase_i = 1'b1;
@@ -61,12 +61,12 @@ module tb_half_sec_pull_counter;
         @(posedge clk);
         srst_i = 1'b0;
 
-        // 6. Ch? v‡i chu k? r?i k?t th˙c
+        // 6. Ch? v√†i chu k? r?i k?t th√∫c
         #(CLK_PERIOD * 5);
         $finish;
     end
 
-    // Theo dıi gi· tr? b? ??m xu?t ra Console khi cÛ thay ??i
+    // Theo d√µi gi√° tr? b? ??m xu?t ra Console khi c√≥ thay ??i
     always @(posedge clk) begin
         $display("[Time %0t ps] srst_i = %b, increase_i = %b, counter_o = %0d", 
                  $time, srst_i, increase_i, half_sec_pull_counter_o);
