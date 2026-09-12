@@ -3,7 +3,7 @@
 
 module tb_top_morse_code;
 
-    // Khai b·o c·c tÌn hi?u
+    // Khai b√°o c√°c t√≠n hi?u
     reg        clk;
     reg        rst_n;
     reg        start_i;
@@ -23,7 +23,7 @@ module tb_top_morse_code;
     integer pass_count = 0;
     integer fail_count = 0;
     
-    // Thanh ghi 40-bit ?? l?u chu?i 5 k˝ t? (m?i k˝ t? 8-bit ASCII)
+    // Thanh ghi 40-bit ?? l?u chu?i 5 k√Ω t? (m?i k√Ω t? 8-bit ASCII)
     reg [39:0] observed_pattern; 
     integer    pattern_len;
     time       start_time, end_time, duration;
@@ -44,7 +44,7 @@ module tb_top_morse_code;
     always #(CLK_PERIOD/2) clk = ~clk;
 
     // =========================================================================
-    // KH?I MONITOR: B?T M√ MORSE T? ?? R?NG XUNG & L?U V¿O BUFFER
+    // KH?I MONITOR: B?T M√É MORSE T? ?? R?NG XUNG & L?U V√ÄO BUFFER
     // =========================================================================
     always @(posedge morse_o) begin
         start_time = $time;
@@ -54,10 +54,10 @@ module tb_top_morse_code;
         end_time = $time;
         duration = end_time - start_time;
         
-        // ?o ?? r?ng xung: > 1200ns l‡ Dash (-), ng??c l?i l‡ Dot (.)
+        // ?o ?? r?ng xung: > 1200ns l√† Dash (-), ng??c l?i l√† Dot (.)
         if (duration > 1200) begin
             $write("-");
-            // Ghi k˝ t? '-' v‡o ?˙ng v? trÌ trong thanh ghi chu?i
+            // Ghi k√Ω t? '-' v√†o ?√∫ng v? tr√≠ trong thanh ghi chu?i
             case (pattern_len)
                 0: observed_pattern[39:32] = "-";
                 1: observed_pattern[31:24] = "-";
@@ -67,7 +67,7 @@ module tb_top_morse_code;
             endcase
         end else begin
             $write(".");
-            // Ghi k˝ t? '.' v‡o ?˙ng v? trÌ trong thanh ghi chu?i
+            // Ghi k√Ω t? '.' v√†o ?√∫ng v? tr√≠ trong thanh ghi chu?i
             case (pattern_len)
                 0: observed_pattern[39:32] = ".";
                 1: observed_pattern[31:24] = ".";
@@ -80,37 +80,37 @@ module tb_top_morse_code;
     end
 
     // =========================================================================
-    // TASK G?I K› T? V¿ KI?M TRA (CHECKER)
+    // TASK G?I K√ù T? V√Ä KI?M TRA (CHECKER)
     // =========================================================================
     task send_char;
         input [5:0]    code;
         input          l_space;
         input          w_space;
-        input [8*15:1] char_name;        // TÍn hi?n th? (T?i ?a 15 k˝ t?)
-        input [39:0]   expected_pattern; // Chu?i mong ??i (ChÌnh x·c 5 k˝ t?)
+        input [8*15:1] char_name;        // T√™n hi?n th? (T?i ?a 15 k√Ω t?)
+        input [39:0]   expected_pattern; // Chu?i mong ??i (Ch√≠nh x√°c 5 k√Ω t?)
         begin
-            // XÛa buffer tr??c khi nh?n m„ m?i (Ghi 5 d?u c·ch tr?ng)
+            // X√≥a buffer tr??c khi nh?n m√£ m?i (Ghi 5 d?u c√°ch tr?ng)
             observed_pattern = "     "; 
             pattern_len      = 0;
             
             $write("[Time: %0t ps] Kiem tra %s: ", $time, char_name);
             
-            // D˘ng Non-blocking (<=) ?? ??ng b? hÛa, tr·nh Race Condition
+            // D√πng Non-blocking (<=) ?? ??ng b? h√≥a, tr√°nh Race Condition
             letter_code_i     <= code;
             letter_space_en_i <= l_space;
             word_space_en_i   <= w_space;
             
-            // KÌch xung start
+            // K√≠ch xung start
             @(posedge clk);
             start_i <= 1'b1;
             @(posedge clk);
             start_i <= 1'b0;
             
-            // ??i FSM b?t ??u x? l˝ r?i ch? nÛ xong (busy_o r?t xu?ng 0)
+            // ??i FSM b?t ??u x? l√Ω r?i ch? n√≥ xong (busy_o r?t xu?ng 0)
             @(posedge clk); 
             wait(busy_o == 1'b0);
             
-            // T? ??ng ki?m tra sau khi FSM ph·t xong
+            // T? ??ng ki?m tra sau khi FSM ph√°t xong
             if (observed_pattern == expected_pattern) begin
                 $display("  -> [PASS]");
                 pass_count = pass_count + 1;
@@ -119,7 +119,7 @@ module tb_top_morse_code;
                 fail_count = fail_count + 1;
             end
             
-            // Ch? thÍm 1 kho?ng nh? tr??c khi test ca ti?p theo
+            // Ch? th√™m 1 kho?ng nh? tr??c khi test ca ti?p theo
             #(CLK_PERIOD * 10);
         end
     endtask
@@ -145,30 +145,30 @@ module tb_top_morse_code;
         $display("   BAT DAU TESTBENCH MORSE CODE (AUTO-CHECKING)");
         $display("=======================================================\n");
 
-        // Tham s?: send_char( M„, L_Space, W_Space, "TÍn", "Chu?i mong ??i (?˙ng 5 k˝ t?)" )
-        // L?u ˝: Chu?i mong ??i ph?i b˘ thÍm phÌm c·ch (space) cho ?? 5 k˝ t?
+        // Tham s?: send_char( M√£, L_Space, W_Space, "T√™n", "Chu?i mong ??i (?√∫ng 5 k√Ω t?)" )
+        // L?u √Ω: Chu?i mong ??i ph?i b√π th√™m ph√≠m c√°ch (space) cho ?? 5 k√Ω t?
 
-        // --- NhÛm 1: C·c nguyÍn ‚m v‡ ch? c·i ph? bi?n ---
+        // --- Nh√≥m 1: C√°c nguy√™n √¢m v√† ch? c√°i ph? bi?n ---
         send_char(6'd0,  1, 0, "Chu A", ".-   "); 
         send_char(6'd4,  1, 0, "Chu E", ".    "); 
         send_char(6'd8,  1, 0, "Chu I", "..   "); 
         send_char(6'd14, 1, 0, "Chu O", "---  "); 
         send_char(6'd20, 1, 0, "Chu U", "..-  "); 
 
-        // --- NhÛm 2: C·c ch? c·i ?? d‡i t?i ?a (4 ph?n t?) ---
+        // --- Nh√≥m 2: C√°c ch? c√°i ?? d√†i t?i ?a (4 ph?n t?) ---
         send_char(6'd1,  1, 0, "Chu B", "-... "); 
         send_char(6'd2,  1, 0, "Chu C", "-.-. "); 
         send_char(6'd5,  1, 0, "Chu F", "..-. "); 
         send_char(6'd16, 1, 0, "Chu Q", "--.- "); 
         send_char(6'd25, 1, 0, "Chu Z", "--.. "); 
 
-        // --- NhÛm 3: Test kho?ng ng?t t? (Word Space) - MÙ ph?ng SOS ---
+        // --- Nh√≥m 3: Test kho?ng ng?t t? (Word Space) - M√¥ ph?ng SOS ---
         $display("\n--- Kiem tra tu SOS kem Word Space ---");
         send_char(6'd18, 1, 0, "Chu S", "...  "); // Letter space
         send_char(6'd14, 1, 0, "Chu O", "---  "); // Letter space
-        send_char(6'd18, 0, 1, "Chu S (End)", "...  "); // Word space (K?t th˙c t?)
+        send_char(6'd18, 0, 1, "Chu S (End)", "...  "); // Word space (K?t th√∫c t?)
 
-        // --- NhÛm 4: C·c ch? s? (5 ph?n t?) ---
+        // --- Nh√≥m 4: C√°c ch? s? (5 ph?n t?) ---
         $display("\n--- Kiem tra Chu So ---");
         send_char(6'd26, 1, 0, "So 1", ".----"); 
         send_char(6'd28, 1, 0, "So 3", "...--"); 
@@ -177,9 +177,9 @@ module tb_top_morse_code;
         send_char(6'd34, 1, 0, "So 9", "----."); 
         send_char(6'd35, 1, 0, "So 0", "-----"); // Edge case default
 
-        // --- NhÛm 5: M?t s? ch? c·i ng?u nhiÍn cÚn l?i ---
+        // --- Nh√≥m 5: M?t s? ch? c√°i ng?u nhi√™n c√≤n l?i ---
         $display("\n--- Kiem tra Bo sung ---");
-        send_char(6'd19, 0, 0, "Chu T", "-    "); // KhÙng space
+        send_char(6'd19, 0, 0, "Chu T", "-    "); // Kh√¥ng space
         send_char(6'd12, 1, 0, "Chu M", "--   "); 
 
         $display("\n=======================================================");
