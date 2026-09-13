@@ -2,7 +2,7 @@
 
 module tb_top_morse_code_pipeline;
 
-    // Khai b·o tÌn hi?u
+    // Khai b√°o t√≠n hi?u
     reg        clk;
     reg        rst_n;
     reg        start_i;
@@ -36,7 +36,7 @@ module tb_top_morse_code_pipeline;
 
     always #(CLK_PERIOD/2) clk = ~clk;
 
-    // B?t m„ Morse
+    // B?t m√£ Morse
     always @(posedge morse_o) begin
         start_time = $time;
     end
@@ -89,7 +89,7 @@ module tb_top_morse_code_pipeline;
             @(posedge clk);
             start_i <= 1'b0;
             
-            // ??i 3 chu k? ?? tÌn hi?u truy?n qua 2 t?ng Pipeline tr??c khi soi c? busy_o
+            // ??i 3 chu k? ?? t√≠n hi?u truy?n qua 2 t?ng Pipeline tr??c khi soi c? busy_o
             repeat(3) @(posedge clk); 
             wait(busy_o == 1'b0);
             
@@ -105,7 +105,7 @@ module tb_top_morse_code_pipeline;
         end
     endtask
 
-    // H‡m quy ??i
+    // H√†m quy ??i
     function [5:0] ascii_to_code;
         input [7:0] char;
         begin
@@ -137,13 +137,13 @@ module tb_top_morse_code_pipeline;
                 "S", "s": get_expected_morse = "...  ";
                 "T", "t": get_expected_morse = "-    ";
                 "U", "u": get_expected_morse = "..-  ";
-                // B? sung c·c k˝ t? kh·c n?u c?n...
+                // B? sung c√°c k√Ω t? kh√°c n?u c?n...
                 default : get_expected_morse = "     ";
             endcase
         end
     endfunction
 
-    // K?ch b?n 30 ch? c·i
+    // K?ch b?n 30 ch? c√°i
     reg [8*39:1] paragraph = "HELLO HCMUT I AM HIEU SOC TESTING END  "; 
     
     integer i;
