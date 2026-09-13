@@ -47,7 +47,7 @@ module top_morse_code_pipeline (
         end
     end
  half_second_pulse #(
-        .P_COUNT_MAX(49)                      // ??m 50 chu k? clock cho mô ph?ng
+        .P_COUNT_MAX(49)                      // ??m 50 chu k? clock cho mÃ´ ph?ng
     ) u_pulse_gen (
         .clk                 (clk),
         .rst_n               (rst_n),
@@ -57,8 +57,8 @@ module top_morse_code_pipeline (
  half_sec_pull_counter u_counter (
         .clk                     (clk),
         .rst_n                   (rst_n),
-        .srst_i                  (w_half_sec_pulse_counter_srst), // Xóa b? ??m khi chuy?n state
-        .increase_i              (w_half_sec_pulse),              // T?ng ??m khi có xung 0.5s
+        .srst_i                  (w_half_sec_pulse_counter_srst), // XÃ³a b? ??m khi chuy?n state
+        .increase_i              (w_half_sec_pulse),              // T?ng ??m khi cÃ³ xung 0.5s
         .half_sec_pull_counter_o (w_half_sec_pulse_counter)
        );
  fsm_controller u_fsm (
